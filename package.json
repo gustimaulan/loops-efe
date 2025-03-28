@@ -1,4 +1,13 @@
 {
+  "name": "switch-admin-efe-loops",
+  "version": "1.0.0",
+  "main": "server.js",
+  "engines": {
+    "node": ">=16.0.0"},
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@playwright/browser-chromium": "^1.51.1",
     "axios": "^1.8.2",

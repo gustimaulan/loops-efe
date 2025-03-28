@@ -43,8 +43,7 @@ async function getBrowser() {
   try {
     const browser = await chromium.connect(BCAT_URL, {
       headers: {'Api-Key': BCAT_API_KEY},
-      headless: true,
-      timeout: 30000
+      timeout: 10000,
     });
 
     console.log("BrowserCat connection successful!");
@@ -223,7 +222,7 @@ async function processAutomation(requestData) {
       filteredCampaignIds = CAMPAIGN_IDS.filter(id => id !== 249397);
       console.log("Malam request: Excluding campaign ID 249397");
     } else if (timeOfDay === "dhuha" || timeOfDay === "sore") {
-      filteredCampaignIds = [249397]; // Only process 249397 for sore
+      filteredCampaignIds = [249397]; // Only process 249397
       console.log("Sore request: Processing only campaign ID 249397");
     }
 
@@ -302,12 +301,6 @@ app.post('/run', async (req, res) => {
   let admin1Name = req.body.admin1;
   let admin2Name = req.body.admin2;
   const timeOfDay = req.body.timeOfDay || "unknown";
-
-  // Special case for sore: override admins to "admin 1"
-//   if (timeOfDay === "sore") {
-//     admin1Name = "admin 1";
-//     admin2Name = "admin 1";
-//   }
 
   if (!ALLOWED_ADMIN_NAMES.includes(admin1Name) || !ALLOWED_ADMIN_NAMES.includes(admin2Name)) {
     return res.status(400).send('Invalid admin names!');
